@@ -12,6 +12,7 @@ lines[1]
 lines[4]
 lines.last()
 lines.pop()
+lines[-1]
 
 # 4. Work out the index position of 'Haymarket'
 lines.index('Haymarket')
@@ -26,7 +27,8 @@ lines.push('York Place')
 lines.delete('Edinburgh Park')
 
 # # 8. Delete 'Edinburgh Park' from the array by index
-lines.delete(1)
+# lines.delete(1) - it is looking for an integer 1 rather than the index 1. 
+lines.delete_at(1) #correct answer
 
 # # 9. Reverse the positions of the stops in the array
 print lines.reverse() # or lines.reverse!() depending on desired outcome.
@@ -44,10 +46,10 @@ puts my_hash[:two]
 puts my_hash["two"]
 
 # # 4. How would you add `{3 => "Three"}` to the hash?
-puts my_hash[3] = "Three"
+my_hash[3] = "Three"
 
 # # 5. How would you add `{:four => 4}` to the hash?
-puts my_hash[:four] = 4
+my_hash[:four] = 4
 
 ### C. Given the following data structure:
 
@@ -58,8 +60,8 @@ users = {
     :home_town => "Stirling",
     :pets => {
       "fluffy" => :cat,
-      "fido" => :dog,
-      "spike" => :dog
+      "fido" => :dog, #use of strings as key means they are individual, as in this example
+      "spike" => :dog # :dog wouldn't allow variety for calling the data
     }
   },
   "Erik" => {
@@ -98,15 +100,27 @@ users["Avril"][:pets]["colin"]
 # 5. Return the smallest of Erik's favorite numbers
 users["Erik"][:favourite_numbers].min()
 users["Erik"][:favourite_numbers][0]
+users["Erik"][:favourite_numbers].first() #another option if you know that the number is first
+
 
 # 6. Add the number `7` to Erik's favorite numbers
 users["Erik"][:favourite_numbers].push(7)
+users["Erik"][:favourite_numbers].unshift(7) #another option
+#assigning the hash to a variable and then push into the variable and replace the hash.
 
 # 7. Change Erik's hometown to Edinburgh
 users["Erik"][:home_town] = "Edinburgh"
 
 # 8. Add a pet dog to Erik called "Fluffy"
-users["Erik"][:pets]["Fluffy"] = "rabbit"
+users["Erik"][:pets]["fluffy"] = :dog #revised to symbol from string
 
 # 9. Add yourself to the users hash
-users["Ben"] = { twitter: "not yet", :favourite_movie => "Predator (1987)", home_town: "Wagga Wagga"}
+users["Ben"] = { twitter: "not yet", 
+  :favourite_movie => "Predator (1987)", 
+  home_town: "Wagga Wagga",
+  pets: {
+    "Bed-slug" => :cat,
+    "Whereever" => :parrot,
+    "Keith" => :jaguar
+  }
+} #pets added to the hash in revision
